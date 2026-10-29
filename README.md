@@ -4,6 +4,12 @@ Code and aggregate results for the analysis of four employee-voice configuration
 
 The survey data are available from the [UK Data Service, study 9511](https://doi.org/10.5255/UKDA-SN-9511-2) under its access conditions. Respondent records are not distributed here.
 
+## Verify published results
+
+[Open in Colab](https://colab.research.google.com/github/evidenceworks/employee-voice-procedures/blob/main/notebooks/verify_results.ipynb)
+
+The notebook checks the released aggregate results, displays employee-voice profiles and sensitivity estimates and downloads `employee-voice-results.zip` with three CSV tables and a verification record. It runs without respondent-level data.
+
 ## Reproduce the analysis
 
 Use Python 3.12 with the dependencies in `requirements.txt`. After obtaining the authorized Stata survey archive, run:
@@ -14,7 +20,7 @@ python code/reproduce.py --source-zip "../UKDS_STATA.zip" --out "../ewcs-reprodu
 
 The program reproduces the study population, model contrasts, sensitivity estimates and aggregate tables. It expects the second-edition UKDS Stata ZIP. The output directory must be new or empty. Keep its respondent-level intermediate files private.
 
-The released aggregates can be checked without access to respondent data:
+The released aggregates can also be checked locally:
 
 ```sh
 python code/check_aggregates.py --results results
