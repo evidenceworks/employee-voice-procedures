@@ -1,0 +1,15 @@
+data/
+private/
+work/
+.env
+.venv/
+__pycache__/
+*.dta
+*.sav
+*.npz
+*.zip
+*.docx
+*.pdf
+
+.pytest_cache/
+*.pyc
