@@ -12,7 +12,7 @@ Use Python 3.12 with the dependencies in `requirements.txt`. After obtaining the
 python code/reproduce.py --source-zip "../UKDS_STATA.zip" --out "../ewcs-reproduction"
 ```
 
-The program reproduces the study population, model contrasts, sensitivity estimates and aggregate tables. It expects the second-edition UKDS Stata ZIP with SHA-256 `33634a7d6c45b781edb05d329494bf925f78b561f8d0ef89e25cf7ee699dacf0`. The output directory must be new or empty. Keep its respondent-level intermediate files private.
+The program reproduces the study population, model contrasts, sensitivity estimates and aggregate tables. It expects the second-edition UKDS Stata ZIP. The output directory must be new or empty. Keep its respondent-level intermediate files private.
 
 The released aggregates can be checked without access to respondent data:
 
