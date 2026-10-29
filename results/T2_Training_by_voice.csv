@@ -1,0 +1,13 @@
+group,outcome,cell_n,group_n,weighted_pct
+neither,Trained,1241,6149,22.2916
+neither,Untrained_requested,281,6149,5.2047
+neither,Untrained_no_request,4627,6149,72.5036
+representation_only,Trained,1141,2460,47.0686
+representation_only,Untrained_requested,181,2460,8.1002
+representation_only,Untrained_no_request,1138,2460,44.8311
+meetings_only,Trained,2085,4566,51.9033
+meetings_only,Untrained_requested,239,4566,4.8131
+meetings_only,Untrained_no_request,2242,4566,43.2837
+both,Trained,5301,8815,63.422
+both,Untrained_requested,500,8815,5.9064
+both,Untrained_no_request,3014,8815,30.6716

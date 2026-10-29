@@ -1,0 +1,13 @@
+group,outcome,cell_n,group_n,weighted_pct
+neither,1,437,1122,39.5438
+neither,2,485,1122,39.5632
+neither,3,200,1122,20.8929
+representation_only,1,420,809,53.5576
+representation_only,2,271,809,35.2694
+representation_only,3,118,809,11.173
+meetings_only,1,772,1282,63.4123
+meetings_only,2,334,1282,25.4886
+meetings_only,3,176,1282,11.0991
+both,1,2034,3335,61.7487
+both,2,828,3335,23.9291
+both,3,473,3335,14.3222

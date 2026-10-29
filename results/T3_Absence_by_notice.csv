@@ -1,0 +1,7 @@
+group,outcome,cell_n,group_n,weighted_pct
+Longer_notice,0,1839,3621,53.0774
+Longer_notice,1,1782,3621,46.9226
+Short_notice,0,1366,2878,51.9294
+Short_notice,1,1512,2878,48.0706
+Stable,0,6702,10240,67.6204
+Stable,1,3538,10240,32.3796

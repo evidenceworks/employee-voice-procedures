@@ -1,0 +1,10 @@
+outcome,contrast,estimate_pp,se_pp,lo95_pp,hi95_pp,p,n,holm_p_primary,provenance
+procedure_yes,representation_only - neither,12.56819047,4.17665205,4.37806501,20.75831593,0.00264640,6548.00000000,0.00529280,original_T7
+procedure_yes,meetings_only - neither,20.78064923,4.19502987,12.55448615,29.00681232,0.00000078,6548.00000000,0.00000233,original_T7
+procedure_yes,both - neither,17.40659175,3.36605387,10.80599319,24.00719031,2.51351045528e-07,6548.00000000,,reconstructed_from_rounded_T7_contrasts_and_SEs
+procedure_no,representation_only - neither,-2.32920708,4.37824795,-10.91464814,6.25623397,0.59477743,6548.00000000,,original_T7
+procedure_no,meetings_only - neither,-10.20671059,3.79791231,-17.65415365,-2.75926753,0.00724851,6548.00000000,,original_T7
+procedure_no,both - neither,-9.64682436,3.06811557,-15.66318654,-3.63046218,0.00168521673715,6548.00000000,,reconstructed_from_rounded_T7_contrasts_and_SEs
+procedure_unknown,representation_only - neither,-10.23898339,3.17319255,-16.46139426,-4.01657253,0.00126868,6548.00000000,,original_T7
+procedure_unknown,meetings_only - neither,-10.57393864,3.14839787,-16.74772885,-4.40014843,0.00079559,6548.00000000,,original_T7
+procedure_unknown,both - neither,-7.75976739,3.13685833,-13.91092937,-1.60860541,0.0134379278655,6548.00000000,,reconstructed_from_rounded_T7_contrasts_and_SEs

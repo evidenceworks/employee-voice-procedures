@@ -1,0 +1,2 @@
+model,outcome,contrast,estimate_pp,se_pp,lo95_pp,hi95_pp,p,n
+A_logit_standardized_interaction,procedure_yes,additive_interaction,-16.19602880,5.57033062,-27.11906143,-5.27299617,0.00367537,6548
