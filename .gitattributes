@@ -1,0 +1,3 @@
+code/*.py -text
+results/*.csv -text
+documentation/variable_map.csv -text
