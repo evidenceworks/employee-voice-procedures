@@ -4,7 +4,7 @@ Reproducible aggregate results and analysis code for an EWCS 2024 (second editio
 
 [Run the aggregate verification in Google Colab](https://colab.research.google.com/github/evidenceworks/employee-voice-procedures/blob/main/notebooks/verify_results.ipynb)
 
-In Colab, select **Runtime → Run all**. The notebook retrieves the public repository, checks the released aggregate tables and inferential records, reproduces the seven covariance-derived comparisons and provides an aggregate export. Figure generation is optional. No upload of the repository or respondent data is required.
+In Colab, select **Runtime → Run all**. The notebook retrieves the public repository, checks the released aggregate tables and inferential records, reproduces the seven covariance-derived comparisons and downloads `employee-voice-results.zip`. Figure generation is optional. No upload of the repository or respondent data is required.
 
 For local aggregate checks:
 
