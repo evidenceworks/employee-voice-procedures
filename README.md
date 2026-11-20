@@ -1,32 +1,23 @@
-# Employee voice and reported procedural clarity
+# Employee voice and procedural clarity
 
-Code and aggregate results for the analysis of four employee-voice configurations and three procedural responses among 6,548 eligible employees in the EU27, using the European Working Conditions Survey 2024, second edition.
+Reproducible aggregate results and analysis code for an EWCS 2024 (second edition) study of 6,548 employees in the EU27. The study compares four configurations of reported employee voice with three responses concerning a clear procedure for challenging computer-mediated decisions.
 
-The survey data are available from the [UK Data Service, study 9511](https://doi.org/10.5255/UKDA-SN-9511-2) under its access conditions. Respondent records are not distributed here.
+[Run the aggregate verification in Google Colab](https://colab.research.google.com/github/evidenceworks/employee-voice-procedures/blob/main/notebooks/verify_results.ipynb)
 
-## Verify published results
+In Colab, select **Runtime → Run all**. The notebook retrieves the public repository, checks the released aggregate tables and inferential records, reproduces the seven covariance-derived comparisons and provides an aggregate export. Figure generation is optional. No upload of the repository or respondent data is required.
 
-[Open in Colab](https://colab.research.google.com/github/evidenceworks/employee-voice-procedures/blob/main/notebooks/verify_results.ipynb)
-
-The notebook checks the released aggregate results, displays employee-voice profiles and sensitivity estimates and downloads `employee-voice-results.zip` with three CSV tables and a verification record. It runs without respondent-level data.
-
-## Reproduce the analysis
-
-Use Python 3.12 with the dependencies in `requirements.txt`. After obtaining the authorized Stata survey archive, run:
+For local aggregate checks:
 
 ```sh
-python code/reproduce.py --source-zip "../UKDS_STATA.zip" --out "../ewcs-reproduction"
-```
-
-The program reproduces the study population, model contrasts, sensitivity estimates and aggregate tables. It expects the second-edition UKDS Stata ZIP. The output directory must be new or empty. Keep its respondent-level intermediate files private.
-
-The released aggregates can also be checked locally:
-
-```sh
-python code/check_aggregates.py --results results
 python code/verify_scientific_files.py
+python code/verify_public_results.py --out ../aggregate-verification
+python -m unittest discover -s tests -v
 ```
 
-Figures can be generated from the released aggregates with `python code/plot_figures.py --tables-dir results --baseline-csv results/BASELINE_Q57.csv --out ../ewcs-figures`.
+Reestimating the survey models requires authorized access to [EWCS 2024 V2, UK Data Service study 9511](https://doi.org/10.5255/UKDA-SN-9511-2):
 
-The code, numerical results and variable definitions are organized under `code/`, `results/` and `documentation/`. The [MIT license](LICENSE) covers original code. See [third-party rights](third-party.md) for source conditions and public documentation.
+```sh
+python code/reproduce.py --source-zip ../UKDS_STATA.zip --out ../ewcs-reproduction
+```
+
+Variable definitions and the survey design are documented in `documentation/`. Code is released under [MIT](LICENSE); rights to the original data are described in [third-party.md](third-party.md).

@@ -1,0 +1,18 @@
+EWCS 2024, second edition, UK Data Service study 9511
+Dataset DOI: https://doi.org/10.5255/UKDA-SN-9511-2
+V2 DTA SHA-256: d5cb93c4f7f4ad148ad6f1628abe061b29252516b2c8eb98f05a05ccc9d2e49c
+Legacy distribution ZIP SHA-256: 33634a7d6c45b781edb05d329494bf925f78b561f8d0ef89e25cf7ee699dacf0
+Legacy member: UKDA-9511-stata/stata/stata13/ewcs24_dataset_ukda_v2.dta
+
+Source dimensions: 36,644 observations and 394 variables.
+EU27 domain: 28,621 respondents and 23,995 self-declared employees.
+Q56 routing: at least one of task allocation, working-time allocation or performance monitoring to a large or some extent.
+Routed employees: 7,038. Valid Q57: 6,988. Valid Q80a and Q80c: 6,548.
+The 440 excluded employees have 210 affirmative, 74 negative and 156 uncertain Q57 responses.
+
+Primary weight: released calweight. Country-nested PSU/stratum sandwich with zero scores outside the analysis domain, fixed weights and average nonsingleton variance for six singleton strata.
+Design: 2,857 PSUs, 402 strata, 2,455 degrees of freedom.
+This is a with-replacement approximation, not a reconstruction of every national sampling/calibration operation.
+
+All original result CSVs retain their original bytes. BASELINE_Q57.csv contains three common-baseline contrasts plus covariance information recovered from the frozen model outputs. response_state_comparisons.csv contains seven cross-response covariance derivations. Neither derivation is a new model fit.
+Data S1 has 280 original Model_contrasts rows (277 original inference records plus three derived common-baseline contrasts) followed by seven response-state comparisons. The other five sheets retain their scientific values.

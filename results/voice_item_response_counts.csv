@@ -1,0 +1,4 @@
+q57_response,routed_q57_valid_n,both_voice_items_valid_n,voice_incomplete_n,voice_incomplete_percent_within_response,response_percent_within_voice_complete,response_percent_within_voice_incomplete,weighting
+Yes,3873,3663,210,5.4221533694810224,55.940745265729994,47.72727272727273,Unweighted counts and percentages
+No,1992,1918,74,3.714859437751004,29.291386682956627,16.818181818181817,Unweighted counts and percentages
+Does not know,1123,967,156,13.891362422083704,14.767868051313378,35.45454545454545,Unweighted counts and percentages

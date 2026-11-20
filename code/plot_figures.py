@@ -29,7 +29,7 @@ GROUP_LABELS = ["Neither", "Representation only", "Meetings only", "Both"]
 T1 = "T1_Procedure_by_voice.csv"
 T7 = "T7_Model_contrasts.csv"
 
-CAPTIONS = {'Figure1_Procedure_profiles': "**Figure 1. Procedural response profiles by reported organizational voice configuration.** Percentages use the released final calibration weight among 6,548 eligible employees with valid reports of both channels. Representation comprises a trade union, works council or similar committee; meetings are regular opportunities to express views. Neither refers only to these two items. Percentages are descriptive, without covariate adjustment. Source: authors' calculations from EWCS 2024 V2; exact values and counts are in SI Table S2.", 'FigureS1_Adjusted_contrasts': '**Figure S1. Adjusted configuration contrasts in reported procedural clarity.** The both-versus-neither contrast is derived in S6; all estimates are reported in Table S3. Whiskers are pointwise 95% intervals. The additive interaction is secondary. Reported representation and meetings concern the company or organization, without establishing personal access or local availability.', 'FigureS2_Paired_domains': '**Figure S2. Exploratory paired outcome comparison.** All three plotted estimates use N=6,516 and identical adjustment and final weights. The paired difference retains the covariance between outcomes. Training concerns the preceding 12 months; the procedural item concerns a current assessment. The contrast does not compare validated constructs on a universal scale of institutional effectiveness. It cannot show that representatives negotiated training, that meetings conveyed a procedure or that a shared organizational process caused the difference.'}
+CAPTIONS = {'Figure1_Procedure_profiles': "Figure 1. Procedural responses by employee-voice configuration. Weighted percentages among 6,548 eligible EU27 employees. Representation includes a union, works council or similar body; meetings provide regular opportunities to express views. The configurations refer to these two channels. Source: author’s calculations from EWCS 2024 V2; counts are in Table S5.", 'FigureS1_Adjusted_contrasts': "Figure S1. Adjusted differences in reporting a clear procedure across employee-voice configurations. Points represent percentage-point contrasts and whiskers show pointwise 95% confidence intervals. The both-versus-neither estimate is recovered from the existing contrast covariance (S6). The hollow diamond (*) identifies the covariance-derived both-versus-neither contrast. Source: author’s calculations from EWCS 2024 V2.", 'FigureS2_Paired_domains': "Figure S2. Exploratory comparison of employer-paid training and reported procedural clarity. All three estimates use the same 6,516 respondents, covariates and final weights. The paired difference incorporates within-person covariance. Training covers the preceding 12 months; procedural clarity concerns the current report. Source: author’s calculations from EWCS 2024 V2."}
 
 
 def digest(data):
@@ -43,9 +43,7 @@ def rows(data):
 def draw_forest(records, labels, stem, title, subtitle, xlabel, xlim, xticks,
                 size, derived_index=None, footnote=None):
     fig, ax = plt.subplots(figsize=size)
-    fig.subplots_adjust(left=.33, right=.735, top=.76, bottom=.25)
-    fig.text(.035, .955, title, ha="left", va="top", fontsize=15, fontweight="bold")
-    fig.text(.035, .87, subtitle, ha="left", va="top", fontsize=10.8, color=SUBTLE)
+    fig.subplots_adjust(left=.33, right=.735, top=.90, bottom=.20)
     n = len(records)
     for i, r in enumerate(records):
         e, lo, hi = (float(r[k]) for k in ("estimate_pp", "lo95_pp", "hi95_pp"))
@@ -73,9 +71,6 @@ def draw_forest(records, labels, stem, title, subtitle, xlabel, xlim, xticks,
     ax.grid(axis="x", color="#DBE2E6", linewidth=.7, zorder=0)
     ax.spines["left"].set_visible(False)
     ax.spines["bottom"].set_color("#ADB9C0")
-    if footnote:
-        fig.text(.035, .035, footnote, ha="left", va="bottom", fontsize=9.4,
-                 color=SUBTLE)
     return fig
 
 
@@ -104,6 +99,11 @@ def save_figure(fig, stem, out):
             path.write_text(path.read_text(encoding="utf-8").replace("matplotlib.axis_", "axis_"), encoding="utf-8")
         result["outputs"][path.name] = {"sha256": digest(path.read_bytes()),
                                         "bytes": path.stat().st_size}
+    from PIL import Image
+    path = out / (stem + ".tiff")
+    with Image.open(out / (stem + ".png")) as image:
+        image.save(path, format="TIFF", compression="tiff_deflate", dpi=(300, 300))
+    result["outputs"][path.name] = {"sha256": digest(path.read_bytes()), "bytes": path.stat().st_size}
     plt.close(fig)
     return result
 
@@ -136,12 +136,8 @@ def main():
     })
     results = {}
     stem = "Figure1_Procedure_profiles"
-    fig, ax = plt.subplots(figsize=(10.2, 4.7))
-    fig.subplots_adjust(left=.235, right=.975, top=.78, bottom=.275)
-    fig.text(.035, .955, "Reported procedural clarity", ha="left", va="top",
-             fontsize=15, fontweight="bold")
-    fig.text(.035, .87, "By reported voice configuration among eligible EU27 employees (N = 6,548)",
-             ha="left", va="top", fontsize=10.8, color=SUBTLE)
+    fig, ax = plt.subplots(figsize=(10.2, 3.85))
+    fig.subplots_adjust(left=.235, right=.975, top=.97, bottom=.30)
     left = np.zeros(4)
     for level, label, color in [("1", "Reports clear procedure", BLUE),
                                  ("2", "Reports no clear procedure", ORANGE),
@@ -183,7 +179,7 @@ def main():
         stem, "Reported procedural clarity: adjusted contrasts",
         "Differences in reporting a clear procedure (N = 6,548)",
         "Adjusted difference (percentage points)", (-32, 34), list(range(-30, 31, 10)),
-        (10.5, 5.4), derived_index=2,
+        (10.5, 4.5), derived_index=2,
         footnote="* Secondary contrast recovered from model covariance.")
     results[stem] = save_figure(fig, stem, args.out)
     results[stem]["values"] = selected
@@ -197,7 +193,7 @@ def main():
         stem, "Exploratory paired comparison",
         "Both channels versus meetings only on the same respondents (N = 6,516)",
         "Adjusted difference (percentage points)", (-15, 25), [-10, 0, 10, 20],
-        (10.5, 4.7))
+        (10.5, 3.7))
     results[stem] = save_figure(fig, stem, args.out)
     results[stem]["values"] = selected
     (args.out / "CAPTIONS.md").write_text("# Figure captions\n\n" +
