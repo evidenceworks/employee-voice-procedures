@@ -1,3 +1,4 @@
 code/*.py -text
 results/*.csv -text
 documentation/variable_map.csv -text
+checksums/*.sha256 text eol=lf

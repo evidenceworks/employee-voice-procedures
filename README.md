@@ -20,4 +20,4 @@ Reestimating the survey models requires authorized access to [EWCS 2024 V2, UK D
 python code/reproduce.py --source-zip ../UKDS_STATA.zip --out ../ewcs-reproduction
 ```
 
-Variable definitions and the survey design are documented in `documentation/`. Code is released under [MIT](LICENSE); rights to the original data are described in [third-party.md](third-party.md).
+Variable definitions and the survey design are documented in `documentation/`. Original code is licensed under [MIT](licenses/MIT.txt) and original explanatory text under [CC BY 4.0](licenses/CC-BY-4.0.txt). Source-data rights and attribution are described in [third-party.md](third-party.md).
