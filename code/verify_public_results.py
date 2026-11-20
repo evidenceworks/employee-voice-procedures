@@ -7,7 +7,7 @@ The verification uses published aggregate tables. It does not read respondent
 records or estimate any survey models.
 """
 from __future__ import annotations
-import argparse,csv,hashlib,json,subprocess,sys,tempfile
+import argparse,csv,hashlib,json,math,subprocess,sys,tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,6 +23,51 @@ def records(path):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+# Published files remain subject to SHA-256 verification. Calculated floating-
+# point results are compared numerically across supported Python environments.
+FLOAT_FIELDS = {
+    'response_state_comparisons.csv': {
+        'estimate_pp', 'se_pp', 'lo95_pp', 'hi95_pp', 'p_pointwise',
+        'covariance_no_unknown_pp2',
+    },
+    'voice_item_response_counts.csv': {
+        'voice_incomplete_percent_within_response',
+        'response_percent_within_voice_complete',
+        'response_percent_within_voice_incomplete',
+    },
+}
+
+
+def compare_derived_table(released: Path, recalculated: Path) -> None:
+    float_fields = FLOAT_FIELDS[released.name]
+    with released.open(encoding='utf-8-sig', newline='') as stream:
+        expected_reader = csv.DictReader(stream)
+        expected_fields = expected_reader.fieldnames
+        expected = list(expected_reader)
+    with recalculated.open(encoding='utf-8-sig', newline='') as stream:
+        actual_reader = csv.DictReader(stream)
+        actual_fields = actual_reader.fieldnames
+        actual = list(actual_reader)
+    if expected_fields != actual_fields or len(expected) != len(actual):
+        raise AssertionError(f'Unexpected structure in calculated {released.name}')
+    if expected_fields is None or not float_fields.issubset(expected_fields):
+        raise AssertionError(f'Missing required columns in {released.name}')
+    for number, (original, computed) in enumerate(zip(expected, actual), start=1):
+        for field in expected_fields:
+            left, right = original[field], computed[field]
+            if field in float_fields:
+                x, y = float(left), float(right)
+                if not (math.isfinite(x) and math.isfinite(y)
+                        and math.isclose(x, y, rel_tol=1e-10, abs_tol=1e-8)):
+                    raise AssertionError(
+                        f'Calculated {released.name}, row {number}, {field}: '
+                        f'published={left}, recalculated={right}')
+            elif left != right:
+                raise AssertionError(
+                    f'Calculated {released.name}, row {number}, {field}: '
+                    f'published={left!r}, recalculated={right!r}')
 
 
 def main():
@@ -42,8 +87,7 @@ def main():
         for command in commands:subprocess.run(command,check=True,capture_output=True,text=True)
         names=('response_state_comparisons.csv','voice_item_response_counts.csv')
         for name in names:
-            expected=ROOT/'results'/name
-            assert expected.read_bytes()==(temp/name).read_bytes(),f'Aggregate calculation does not match released results: {name}'
+            compare_derived_table(ROOT/'results'/name, temp/name)
         resp=records(ROOT/'results/response_state_comparisons.csv')
         voice=records(ROOT/'results/voice_item_response_counts.csv')
         assert len(resp)==7 and len(voice)==3
